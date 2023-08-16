@@ -4,7 +4,6 @@ import s from './button.module.scss'
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
-
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
   fullWidth?: boolean
   className?: string
@@ -15,7 +14,5 @@ export const Button = <T extends ElementType = 'button'>(
 ) => {
   const { variant = 'primary', fullWidth, className, as: Component = 'button', ...rest } = props
 
-  return (
-    <Component className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`} {...rest} />
-  )
+  return <Component className={`${s[variant]} ${fullWidth ? s.fullWidth : ''}`} {...rest} />
 }
