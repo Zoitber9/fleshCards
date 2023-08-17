@@ -1,75 +1,80 @@
+@mixin typography($fontSize, $lineHeight, $fontWeight) {
+  margin: 0;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+}
+
 .large {
-  font-size: var(--font-size-xxl);
-  font-weight: 700;
-  line-height: var(--line-height-l);
+  @include typography(var(--font-size-xxl), var(--line-height-l), var(--font-weight-bold));
 }
 
-h1 {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  line-height: var(--line-height-l);
+.h1 {
+  @include typography(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
 }
 
-h2 {
-  font-size: var(--font-size-l);
-  font-weight: 700;
-  line-height: var(--line-height-m);
+.h2 {
+  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
 }
 
-h3 {
-  font-size: var(--font-size-m);
-  font-weight: 700;
-  line-height: var(--line-height-m);
+.h3 {
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 }
 
 .body1 {
-  font-size: var(--font-size-s);
-  font-weight: 400;
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
 }
 
 .body2 {
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
 }
 
 .subtitle1 {
-  font-size: var(--font-size-s);
-  font-weight: 400;
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
 }
 
 .subtitle2 {
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
 }
 
 .caption {
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  line-height: var(--line-height-s);
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
 }
 
 .overline {
-  font-size: var(--font-size-xs);
-  font-weight: 700;
-  line-height: var(--line-height-s);
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-bold));
 }
 
 .link1 {
-  font-size: var(--font-size-s);
-  font-weight: 400;
-  line-height: var(--line-height-m);
-  color: var(--color-info-500);
-  text-decoration: underline;
+  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
+  cursor: pointer;
+  text-decoration-line: underline;
 }
 
 .link2 {
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  line-height: var(--line-height-s);
-  color: var(--color-info-500);
-  text-decoration: underline;
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.primary {
+  color: var(--color-light-100, #fff);
+}
+
+.secondary {
+  color: var(--color-accent-500, #8c61ff);
+}
+
+.link {
+  color: var(--color-primary-500, #397df6);
+}
+
+.inherit {
+  color: var(--color-dark-100);
+}
+
+.error {
+  color: var(--color-danger-300);
 }
