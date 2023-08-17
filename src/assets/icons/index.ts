@@ -1,1 +1,6 @@
 export { Check } from './check.tsx'
+export { Close } from './close.tsx'
+export { EyeSlash } from './eye-slash.tsx'
+export { LogoutSvg } from './logout.tsx'
+export { Search } from './search.tsx'
+export { Eye } from './eye.tsx'
