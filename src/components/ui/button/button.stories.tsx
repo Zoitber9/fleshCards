@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { LogoutSvg } from '../../../assets/icons/logout.tsx'
+
 import { Button } from './'
 
 const meta = {
@@ -11,6 +13,12 @@ const meta = {
       options: ['primary', 'secondary', 'tertiary', 'link'],
       control: { type: 'radio' },
     },
+    fullWidth: {
+      options: [true, false],
+      control: { type: 'radio' },
+    },
+    as: { control: 'text' },
+    children: { control: 'text' },
   },
 } satisfies Meta<typeof Button>
 
@@ -20,15 +28,26 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Button primary',
+    children: 'Primary button',
     disabled: false,
+  },
+}
+export const PrimaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: (
+      <>
+        <LogoutSvg />
+        Primary button
+      </>
+    ),
   },
 }
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Button secondary',
+    children: 'Secondary Button',
     disabled: false,
   },
 }
@@ -42,8 +61,17 @@ export const Tertiary: Story = {
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Link-button',
+    children: 'Link Button',
     disabled: false,
+  },
+}
+
+export const AsLink: Story = {
+  args: {
+    variant: 'tertiary',
+    children: 'Link that looks like a button',
+    as: 'a',
+    href: 'https://google.com',
   },
 }
 
@@ -53,14 +81,5 @@ export const FullWidth: Story = {
     children: 'Full Width Button',
     disabled: false,
     fullWidth: true,
-  },
-}
-
-export const AsLink: Story = {
-  args: {
-    variant: 'primary',
-    children: 'Link that looks like a button',
-    as: 'a',
-    href: 'https://www.google.com',
   },
 }
