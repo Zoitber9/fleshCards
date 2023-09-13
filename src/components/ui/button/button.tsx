@@ -2,9 +2,9 @@ import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import clsx from 'clsx'
 
-import { Typography } from '../../ui/typography'
-
 import s from './button.module.scss'
+
+import { Typography } from '@/components/ui'
 
 export type ButtonProps<T extends ElementType = 'button'> = {
   children?: ReactNode

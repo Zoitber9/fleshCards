@@ -1,51 +1,35 @@
-import { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { TextField } from './textFiled.tsx'
+import { TextField } from './'
 
 const meta = {
   title: 'Components/TextField',
   component: TextField,
   tags: ['autodocs'],
-  argTypes: {
-    type: {
-      options: ['password', 'search'],
-      control: { type: 'radio' },
-    },
-    disabled: {
-      options: [true, false],
-      control: { type: 'radio' },
-    },
-    label: { control: 'text' },
-    errorMessage: { control: 'text' },
-    className: { control: 'text' },
-  },
 } satisfies Meta<typeof TextField>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SimpleInput: Story = {
+export const Default: Story = {
   args: {
-    label: 'Input',
+    label: 'Label',
+    placeholder: 'Placeholder',
   },
 }
-export const SearchInput: Story = {
+
+export const Password: Story = {
   args: {
-    label: 'Search Input',
-    type: 'search',
-  },
-}
-export const InputForPassword: Story = {
-  args: {
-    label: 'Password Input',
-    placeholder: 'password',
+    label: 'Label',
+    placeholder: 'Password',
     type: 'password',
   },
 }
-export const ErrorInput: Story = {
+
+export const Error: Story = {
   args: {
-    label: 'Error Input',
-    type: 'password',
-    errorMessage: 'Error',
+    label: 'Input with error',
+    value: 'Wrong value',
+    errorMessage: 'Error message',
   },
 }

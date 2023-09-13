@@ -2,38 +2,29 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography } from './'
 
-const variantOptions = [
-  'large',
-  'h1',
-  'h2',
-  'h3',
-  'body1',
-  'body2',
-  'subtitle1',
-  'subtitle2',
-  'caption',
-  'overline',
-  'link1',
-  'link2',
-]
-
-const colorOptions = ['primary', 'secondary', 'inherit', 'link', 'error']
-
 const meta = {
   title: 'Components/Typography',
   component: Typography,
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      options: variantOptions,
+      options: [
+        'large',
+        'h1',
+        'h2',
+        'h3',
+        'body1',
+        'body2',
+        'subtitle1',
+        'subtitle2',
+        'caption',
+        'overline',
+        'link1',
+        'link2',
+        'error',
+      ],
       control: { type: 'radio' },
     },
-    color: {
-      options: colorOptions,
-      control: { type: 'radio' },
-    },
-    className: { control: 'text' },
-    children: { control: 'text' },
   },
 } satisfies Meta<typeof Typography>
 
@@ -42,124 +33,91 @@ type Story = StoryObj<typeof meta>
 
 export const Large: Story = {
   args: {
+    children: 'Card content',
     variant: 'large',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const H1: Story = {
   args: {
+    children: 'Card content',
     variant: 'h1',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const H2: Story = {
   args: {
+    children: 'Card content',
     variant: 'h2',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const H3: Story = {
   args: {
+    children: 'Card content',
     variant: 'h3',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Body1: Story = {
   args: {
+    children: 'Card content',
     variant: 'body1',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Body2: Story = {
   args: {
+    children: 'Card content',
     variant: 'body2',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Subtitle1: Story = {
   args: {
+    children: 'Card content',
     variant: 'subtitle1',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Subtitle2: Story = {
   args: {
+    children: 'Card content',
     variant: 'subtitle2',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
-export const CaptionWithError: Story = {
+
+export const Caption: Story = {
   args: {
+    children: 'Card content',
     variant: 'caption',
-    color: 'error',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Overline: Story = {
   args: {
+    children: 'Card content',
     variant: 'overline',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Link1: Story = {
   args: {
+    children: 'Card content',
     variant: 'link1',
-    color: 'link',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
   },
 }
+
 export const Link2: Story = {
   args: {
+    children: 'Card content',
     variant: 'link2',
-    color: 'link',
-    children: (
-      <>
-        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
-      </>
-    ),
+  },
+}
+
+export const Error: Story = {
+  args: {
+    children: 'Card content',
+    variant: 'error',
   },
 }

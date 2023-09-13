@@ -1,115 +1,94 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
+import { ComponentProps, ComponentPropsWithoutRef, forwardRef, useState } from 'react'
 
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 
-import { Close, EyeSlash, Search, Eye } from '../../../assets/icons'
+import { Eye, VisibilityOff } from '../../../assets/icons'
 import { Typography } from '../typography'
 
 import s from './textField.module.scss'
 
-export type TextFieldType = {
-  className?: string
-  type?: 'password' | 'search' | 'text'
-  label?: string
-  placeholder?: string
-  disabled?: boolean
+export type TextFieldProps = {
+  onValueChange?: (value: string) => void
+  containerProps?: ComponentProps<'div'>
+  labelProps?: ComponentProps<'label'>
   errorMessage?: string
+  label?: string
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, TextFieldType>((props, ref) => {
-  const {
-    errorMessage,
-    className,
-    disabled = false,
-    placeholder = 'Input',
-    type = 'text',
-    label,
-    ...rest
-  } = props
-  const [isEye, setIsEye] = useState<boolean>(true)
-  const [inputValue, setInputValue] = useState<string>('')
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  (
+    {
+      className,
+      errorMessage,
+      placeholder,
+      type,
+      containerProps,
+      labelProps,
+      label,
+      onChange,
+      onValueChange,
+      ...restProps
+    },
+    ref
+  ) => {
+    const [showPassword, setShowPassword] = useState(false)
 
-  const showError = !!errorMessage && errorMessage.length > 0
-  const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget.value)
-  }
+    const isShowPasswordButtonShown = type === 'password'
 
-  const clearHandler = () => {
-    setInputValue('')
-  }
+    const finalType = getFinalType(type, showPassword)
 
-  const Input = (type: string) => {
-    switch (type) {
-      case 'search': {
-        return (
-          <>
-            <Search className={s.search} />
-            <input
-              disabled={disabled}
-              className={classNames.input}
-              placeholder={placeholder}
-              value={inputValue}
-              onChange={changeInputValue}
-              ref={ref}
-              {...rest}
-            />
-            <Close className={s.close} onClick={clearHandler} />
-          </>
-        )
-      }
-      case 'password': {
-        return (
-          <>
-            <input
-              disabled={disabled}
-              type={isEye ? 'password' : 'text'}
-              placeholder={placeholder}
-              className={classNames.input}
-              ref={ref}
-              {...rest}
-            />
-            {isEye ? (
-              <Eye onClick={() => setIsEye(false)} />
-            ) : (
-              <EyeSlash onClick={() => setIsEye(true)} />
-            )}
-          </>
-        )
-      }
-      default: {
-        return (
-          <input
-            disabled={disabled}
-            type={'text'}
-            placeholder={placeholder}
-            className={classNames.input}
-            ref={ref}
-            {...rest}
-          />
-        )
-      }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      onValueChange?.(e.target.value)
     }
-  }
 
-  const classNames = {
-    container: clsx(s.container, className),
-    wrapper: clsx(s.wrapper, disabled && s.disabled, errorMessage && s.error),
-    label: clsx(s.label, disabled && s.disabled),
-    error: s.error,
-    input: clsx(s.input, errorMessage && s.error),
-    clearButton: s.clearButton,
-  }
+    const classNames = {
+      root: clsx(s.root, containerProps?.className),
+      fieldContainer: clsx(s.fieldContainer),
+      field: clsx(s.field, !!errorMessage && s.error, className),
+      label: clsx(s.label, labelProps?.className),
+      error: clsx(s.error),
+    }
 
-  return (
-    <div className={classNames.container}>
-      <Typography variant={'body2'} as={'label'} className={classNames.label} color="inherit">
-        {label && label}
-        <Typography as="div" variant={'body1'}>
-          <div className={classNames.wrapper}>{Input(type)}</div>
+    return (
+      <div className={classNames.root}>
+        {label && (
+          <Typography variant="body2" as="label" className={classNames.label}>
+            {label}
+          </Typography>
+        )}
+        <div className={classNames.fieldContainer}>
+          <input
+            className={classNames.field}
+            placeholder={placeholder}
+            ref={ref}
+            type={finalType}
+            onChange={handleChange}
+            {...restProps}
+          />
+          {isShowPasswordButtonShown && (
+            <button
+              className={s.showPassword}
+              type={'button'}
+              onClick={() => setShowPassword(prev => !prev)}
+            >
+              {showPassword ? <VisibilityOff /> : <Eye />}
+            </button>
+          )}
+        </div>
+
+        <Typography variant="error" className={classNames.error}>
+          {errorMessage}
         </Typography>
-        {errorMessage && <div className={s.error}>{errorMessage}</div>}
-      </Typography>
-      {showError && <Typography color="error" variant={'body2'} />}
-    </div>
-  )
-})
+      </div>
+    )
+  }
+)
+
+function getFinalType(type: ComponentProps<'input'>['type'], showPassword: boolean) {
+  if (type === 'password' && showPassword) {
+    return 'text'
+  }
+
+  return type
+}
