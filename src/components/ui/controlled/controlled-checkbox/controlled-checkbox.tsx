@@ -1,4 +1,4 @@
-import { useController, UseControllerProps, FieldValues } from 'react-hook-form'
+import { FieldValues, useController, UseControllerProps } from 'react-hook-form'
 
 import { Checkbox, CheckboxProps } from '@/components/ui'
 
