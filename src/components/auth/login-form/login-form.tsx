@@ -30,24 +30,26 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <DevTool control={control} />
-      <ControlledTextField
-        placeholder={'Email'}
-        name={'email'}
-        control={control}
-        label={'email'}
-        errorMessage={errors.email?.message}
-      />
-      <ControlledTextField
-        placeholder={'Password'}
-        name={'password'}
-        control={control}
-        label={'password'}
-        errorMessage={errors.email?.message}
-      />
-      <ControlledCheckbox name={'rememberMe'} control={control} label={'remember me'} />
-      <Button type="submit">Submit</Button>
-    </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextField
+          placeholder={'Email'}
+          name={'email'}
+          control={control}
+          label={'email'}
+          errorMessage={errors.email?.message}
+        />
+        <ControlledTextField
+          placeholder={'Password'}
+          name={'password'}
+          control={control}
+          label={'password'}
+          errorMessage={errors.email?.message}
+        />
+        <ControlledCheckbox name={'rememberMe'} control={control} label={'remember me'} />
+        <Button type="submit">Submit</Button>
+      </form>
+    </>
   )
 }

@@ -1,5 +1,5 @@
-import { SignIn } from '@/components/auth/sign-in/sign-in.tsx'
+import { ForgotPassword } from '@/components/auth/forgot-password'
 
 export function App() {
-  return <SignIn onSubmit={() => {}} />
+  return <ForgotPassword onSubmit={() => {}} />
 }
