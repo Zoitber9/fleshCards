@@ -1,47 +1,34 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, ReactNode } from 'react'
 
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 
 import s from './button.module.scss'
 
-import { Typography } from '@/components/ui'
-
-export type ButtonProps<T extends ElementType = 'button'> = {
-  children?: ReactNode
+export interface ButtonProps<T extends ElementType = 'button'> {
   as?: T
+  children?: ReactNode
   variant?: 'primary' | 'secondary' | 'tertiary' | 'link'
   fullWidth?: boolean
-  onClick?: () => void
-} & ComponentPropsWithoutRef<'button'>
+  className?: string
+}
 
-export const Button = <T extends ElementType = 'button'>(
-  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
+const Button = <T extends ElementType = 'button'>(
+  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>,
+  ref: ForwardedRef<any>
 ) => {
   const {
+    as: Component = 'button',
     variant = 'primary',
     fullWidth,
     className,
-    as: Component = 'button',
-    onClick,
-    children,
-    ...rest
+    ...otherProps
   } = props
 
   const classNames = {
-    button: clsx(s[variant], fullWidth && s.fullWidth),
-    container: clsx(fullWidth && s.fullWidth, className),
+    root: clsx(s[variant], fullWidth && s.fullWidth, className),
   }
 
-  return (
-    <Typography
-      className={classNames.container}
-      as="div"
-      variant={Component === 'a' ? 'subtitle1' : 'subtitle2'}
-      color={variant === 'link' || variant === 'tertiary' ? 'secondary' : 'primary'}
-    >
-      <Component onClick={onClick} className={classNames.button} {...rest}>
-        {children}
-      </Component>
-    </Typography>
-  )
+  return <Component ref={ref} className={classNames.root} {...otherProps} />
 }
+
+export default forwardRef(Button)

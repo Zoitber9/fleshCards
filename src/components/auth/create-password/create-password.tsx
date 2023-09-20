@@ -3,33 +3,32 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import s from './forgot-password.module.scss'
+import s from './create-password.module.scss'
 
 import { Card, Typography } from '@/components/ui'
 import Button from '@/components/ui/button/button'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
 
-const ForgotPasswordSchema = z.object({
-  email: z
+const CreatePasswordSchema = z.object({
+  password: z
     .string()
     .trim()
-    .email('Invalid email address')
-    .nonempty('Enter email')
-    .min(3, 'Login must be at least 3 characters'),
+    .nonempty('Enter password')
+    .min(8, 'Password must be at least 8 characters'),
 })
 
-type FormType = z.infer<typeof ForgotPasswordSchema>
+type FormType = z.infer<typeof CreatePasswordSchema>
 
 type Props = {
   onSubmit: (data: FormType) => void
 }
 
-export const ForgotPassword = (props: Props) => {
+export const CreatePassword = (props: Props) => {
   const { control, handleSubmit } = useForm<FormType>({
     mode: 'onSubmit',
-    resolver: zodResolver(ForgotPasswordSchema),
+    resolver: zodResolver(CreatePasswordSchema),
     defaultValues: {
-      email: '',
+      password: '',
     },
   })
 
@@ -40,29 +39,23 @@ export const ForgotPassword = (props: Props) => {
       <DevTool control={control} />
       <Card className={s.card}>
         <Typography variant="large" as={'h1'} className={s.title}>
-          Forgot your password?
+          Create new password
         </Typography>
         <form className={s.form} onSubmit={handleFormSubmit}>
           <ControlledTextField
-            className={s.emailInput}
-            placeholder={'Email'}
-            name={'email'}
-            label={'Email'}
+            type={'password'}
+            label={'Password'}
+            placeholder={'Password'}
+            name={'password'}
             control={control}
           />
           <Typography variant="body2" className={s.instructions}>
-            Enter your email address and we will send you further instructions
+            Create new password and we will send you further instructions to email
           </Typography>
-          <Button className={s.buttonSend} fullWidth type={'submit'}>
-            Send Instructions
+          <Button className={s.buttonCreatePassword} fullWidth type={'submit'}>
+            Create New Password
           </Button>
         </form>
-        <Typography variant="body2" className={s.caption}>
-          Did you remember your password?
-        </Typography>
-        <Typography variant="link1" as={'a'} href="/sign-in" className={s.loginLink}>
-          Try logging in
-        </Typography>
       </Card>
     </>
   )
