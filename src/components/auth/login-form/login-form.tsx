@@ -3,8 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { Button } from '../../ui/button'
-
+import Button from '@/components/ui/button/button.tsx'
 import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field.tsx'
 

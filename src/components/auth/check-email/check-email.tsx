@@ -1,7 +1,8 @@
 import s from './check-email.module.scss'
 
 import { Email } from '@/assets/icons'
-import { Button, Card, Typography } from '@/components/ui'
+import { Card, Typography } from '@/components/ui'
+import Button from '@/components/ui/button/button'
 
 type Props = {
   email: string
@@ -17,7 +18,7 @@ export const checkEmail = ({ email }: Props) => {
         <div className={s.iconContainer}>
           <Email />
         </div>
-        <Typography variant="body2" className={s.caption}>
+        <Typography variant="body2" className={s.instructions}>
           We`ve sent an e-mail with instructions to {email}
         </Typography>
         <Button fullWidth={true} as={'a'} href={''}>
