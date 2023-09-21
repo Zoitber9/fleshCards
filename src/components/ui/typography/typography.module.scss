@@ -33,6 +33,8 @@
 
 .body2 {
   @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+
+  color: var(--color-dark-100);
 }
 
 .subtitle2 {
