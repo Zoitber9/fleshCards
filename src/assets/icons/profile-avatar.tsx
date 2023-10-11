@@ -26,4 +26,4 @@ function Icon() {
   )
 }
 
-export const MainAvatar = memo(Icon)
+export const ProfileAvatar = memo(Icon)
