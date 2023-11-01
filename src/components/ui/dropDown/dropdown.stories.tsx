@@ -1,11 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Avatars as Avatar } from './../userAvatar/user-avatar.tsx'
 import s from './dropdown.module.scss'
 
-import { LogOut, Person, ProfileAvatar } from '@/assets/icons'
-import Button from '@/components/ui/button/button.tsx'
-import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown/dropdown.tsx'
+import { Person, LogoutSvg, ProfileAvatar } from '@/assets/icons'
+import { UserAvatar } from '@/components/ui'
+import Button from '@/components/ui/button/button'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown'
 
 const meta = {
   title: 'Components/Dropdown',
@@ -26,9 +26,9 @@ export const Default: Story = {
         trigger={
           <button className={s.button}>
             <div className={s.userName}></div>
-            <Avatar>
+            <UserAvatar>
               <ProfileAvatar />
-            </Avatar>
+            </UserAvatar>
           </button>
         }
       >
@@ -36,16 +36,16 @@ export const Default: Story = {
           <DropdownItemWithIcon
             className={s.containerParagraph}
             icon={
-              <Avatar>
+              <UserAvatar>
                 <ProfileAvatar />
-              </Avatar>
+              </UserAvatar>
             }
             text="Ivan"
             textForEmail=""
           />
         </DropdownItem>
         <DropdownItemWithIcon icon={<Person />} text="My Profile" />
-        <DropdownItemWithIcon icon={<LogOut />} text="Sign Out" />
+        <DropdownItemWithIcon icon={<LogoutSvg />} text="Sign Out" />
       </Dropdown>
     </div>
   ),
