@@ -1,7 +1,6 @@
 import s from './personal-information.module.scss'
 
-import { Edit } from '@/assets/icons'
-import Logout from '@/assets/icons/logout.tsx'
+import { Edit, LogoutSvg } from '@/assets/icons'
 import { Card, Typography } from '@/components/ui'
 import Button from '@/components/ui/button/button.tsx'
 
@@ -51,7 +50,7 @@ const PersonalInformation = ({
         <Typography variant={'body2'}>{email}</Typography>
         <div className={s.logoutButtonContainer}>
           <Button className={s.logoutButton} variant={'secondary'} onClick={handleLogout}>
-            <Logout />
+            <LogoutSvg />
             Logout
           </Button>
         </div>

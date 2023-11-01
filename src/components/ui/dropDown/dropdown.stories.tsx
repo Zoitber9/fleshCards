@@ -2,8 +2,9 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import s from './dropdown.module.scss'
 
-import { Avatars as Avatar, Person, LogoutSvg, ProfileAvatar } from '@/assets/icons'
-import { Button } from '@/components/ui'
+import { Person, LogoutSvg, ProfileAvatar } from '@/assets/icons'
+import { UserAvatar } from '@/components/ui'
+import Button from '@/components/ui/button/button'
 import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown'
 
 const meta = {
@@ -25,9 +26,9 @@ export const Default: Story = {
         trigger={
           <button className={s.button}>
             <div className={s.userName}></div>
-            <Avatar>
+            <UserAvatar>
               <ProfileAvatar />
-            </Avatar>
+            </UserAvatar>
           </button>
         }
       >
@@ -35,9 +36,9 @@ export const Default: Story = {
           <DropdownItemWithIcon
             className={s.containerParagraph}
             icon={
-              <Avatar>
+              <UserAvatar>
                 <ProfileAvatar />
-              </Avatar>
+              </UserAvatar>
             }
             text="Ivan"
             textForEmail=""
