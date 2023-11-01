@@ -3,8 +3,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="none" {...props}>
     <g clipPath="url(#a)">
       <path
-        fill="#fff"
-        d="m8.94 8 2.867-2.86a.67.67 0 0 0-.947-.947L8 7.06 5.14 4.193a.67.67 0 0 0-.947.947L7.06 8l-2.867 2.86a.667.667 0 0 0 .217 1.093.667.667 0 0 0 .73-.146L8 8.94l2.86 2.867a.668.668 0 0 0 1.144-.474.668.668 0 0 0-.197-.473L8.94 8Z"
+        fill="#FFFEFE"
+        d="M13.03 9.68a.67.67 0 0 1-1.1.5L8.36 7.2l-3.58 2.88a.67.67 0 0 1-.94-.1.67.67 0 0 1 .1-.97l4-3.22a.67.67 0 0 1 .85 0l4 3.33a.67.67 0 0 1 .24.56Z"
       />
     </g>
     <defs>
@@ -15,4 +15,4 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-export const Close = memo(SvgComponent)
+export const ArrowUp = memo(SvgComponent)

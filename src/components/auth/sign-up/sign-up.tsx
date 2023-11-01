@@ -5,7 +5,8 @@ import { z } from 'zod'
 
 import s from './sign-up.module.scss'
 
-import { Button, Card, Typography } from '@/components/ui'
+import { Card, Typography } from '@/components/ui'
+import Button from '@/components/ui/button/button.tsx'
 import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field.tsx'
 
 const loginSchema = z
