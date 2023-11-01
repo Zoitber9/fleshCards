@@ -1,11 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Avatars as Avatar } from './../userAvatar/user-avatar.tsx'
 import s from './dropdown.module.scss'
 
-import { LogOut, Person, ProfileAvatar } from '@/assets/icons'
-import Button from '@/components/ui/button/button.tsx'
-import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown/dropdown.tsx'
+import { Avatars as Avatar, Person, LogoutSvg, ProfileAvatar } from '@/assets/icons'
+import { Button } from '@/components/ui'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown'
 
 const meta = {
   title: 'Components/Dropdown',
@@ -45,7 +44,7 @@ export const Default: Story = {
           />
         </DropdownItem>
         <DropdownItemWithIcon icon={<Person />} text="My Profile" />
-        <DropdownItemWithIcon icon={<LogOut />} text="Sign Out" />
+        <DropdownItemWithIcon icon={<LogoutSvg />} text="Sign Out" />
       </Dropdown>
     </div>
   ),
