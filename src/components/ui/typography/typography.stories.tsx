@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Typography } from './'
+import { Typography } from '@/components/ui/typography/typography.tsx'
 
 const meta = {
   title: 'Components/Typography',
@@ -26,6 +26,17 @@ const meta = {
       control: { type: 'radio' },
     },
   },
+  parameters: {
+    backgrounds: {
+      default: 'night',
+      values: [
+        {
+          name: 'night',
+          value: '#000',
+        },
+      ],
+    },
+  },
 } satisfies Meta<typeof Typography>
 
 export default meta
@@ -33,91 +44,93 @@ type Story = StoryObj<typeof meta>
 
 export const Large: Story = {
   args: {
-    children: 'Card content',
     variant: 'large',
+    children: 'This is a large text',
   },
 }
-
 export const H1: Story = {
   args: {
-    children: 'Card content',
     variant: 'h1',
+    children: 'This is a h1 text',
   },
 }
 
 export const H2: Story = {
   args: {
-    children: 'Card content',
     variant: 'h2',
+    children: 'This is a h2 text',
   },
 }
 
 export const H3: Story = {
   args: {
-    children: 'Card content',
     variant: 'h3',
+    children: 'This is a h3 text',
   },
 }
 
 export const Body1: Story = {
   args: {
-    children: 'Card content',
     variant: 'body1',
-  },
-}
-
-export const Body2: Story = {
-  args: {
-    children: 'Card content',
-    variant: 'body2',
+    children: 'This is a body1 text',
   },
 }
 
 export const Subtitle1: Story = {
   args: {
-    children: 'Card content',
     variant: 'subtitle1',
+    children: 'This is a subtitle1 text',
+  },
+}
+
+export const Body2: Story = {
+  args: {
+    variant: 'body2',
+    children: 'This is a body2 text',
   },
 }
 
 export const Subtitle2: Story = {
   args: {
-    children: 'Card content',
     variant: 'subtitle2',
+    children: 'This is a subtitle2 text',
   },
 }
 
 export const Caption: Story = {
   args: {
-    children: 'Card content',
     variant: 'caption',
+    children: 'This is a caption text',
   },
 }
 
 export const Overline: Story = {
   args: {
-    children: 'Card content',
     variant: 'overline',
+    children: 'This is a overline text',
   },
 }
 
 export const Link1: Story = {
   args: {
-    children: 'Card content',
     variant: 'link1',
+    children: 'This is a link 1 text',
+    as: 'a',
   },
 }
 
 export const Link2: Story = {
   args: {
-    children: 'Card content',
     variant: 'link2',
+    href: 'https://google.com',
+    children: 'This is a link 2 text',
   },
 }
 
 export const Error: Story = {
   args: {
-    children: 'Card content',
     variant: 'error',
+    href: 'https://google.com',
+    children: 'This is a Error text',
   },
 }

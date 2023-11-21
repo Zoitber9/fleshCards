@@ -4,8 +4,8 @@ import clsx from 'clsx'
 
 import s from './tables.module.scss'
 
-import { Chevron } from '@/assets/icons'
-import { Typography } from '@/components/ui'
+import { ChevronUp } from '@/assets/icons'
+import { Typography } from '@/components/ui/typography'
 
 export const Root: FC<ComponentProps<'table'>> = ({ className, ...rest }) => {
   const classNames = {
@@ -37,7 +37,7 @@ export const Header: FC<
   >
 > = ({ columns, sort, onSort, ...restProps }) => {
   const classNames = {
-    chevron: sort?.direction === 'asc' ? '' : s.chevronDown,
+    chevron: sort?.direction === 'asc' ? '' : s.chevron,
   }
   const handleSort = (key: string, sortable?: boolean) => () => {
     if (!onSort || !sortable) return
@@ -52,16 +52,28 @@ export const Header: FC<
     })
   }
 
+  const headCell = columns.map(({ title, key, sortable }) => {
+    let chevron
+
+    if (sort?.key === key && sort?.direction === 'asc') {
+      chevron = <ChevronUp key={sort.key} className={classNames.chevron} />
+    } else if (sort?.key === key && sort?.direction === 'desc') {
+      chevron = <ChevronUp key={sort.key} className={s.chevronDown} />
+    } else {
+      chevron = null
+    }
+
+    return (
+      <HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>
+        {title}
+        {chevron}
+      </HeadCell>
+    )
+  })
+
   return (
     <Head {...restProps}>
-      <Row>
-        {columns.map(({ title, key, sortable }) => (
-          <HeadCell key={key} onClick={handleSort(key, sortable)} sortable={sortable}>
-            {title}
-            {sort?.key === key ? <Chevron className={classNames.chevron} /> : ''}
-          </HeadCell>
-        ))}
-      </Row>
+      <Row>{headCell}</Row>
     </Head>
   )
 }
@@ -70,7 +82,7 @@ export const Body: FC<ComponentProps<'tbody'>> = props => {
 }
 
 export const Row: FC<ComponentProps<'tr'>> = props => {
-  return <tr {...props} />
+  return <tr {...props} className={s.trStyle} /> //!!!!
 }
 
 export const HeadCell: FC<

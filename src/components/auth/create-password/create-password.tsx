@@ -5,16 +5,17 @@ import { z } from 'zod'
 
 import s from './create-password.module.scss'
 
-import { Card, Typography } from '@/components/ui'
-import Button from '@/components/ui/button/button'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { ControlledTextField } from '@/components/ui/controlled/controlled-textfiled/controlled-textfield'
+import { Typography } from '@/components/ui/typography'
 
 const CreatePasswordSchema = z.object({
   password: z
     .string()
     .trim()
     .nonempty('Enter password')
-    .min(8, 'Password must be at least 8 characters'),
+    .min(3, 'Password must be at least 3 characters'),
 })
 
 type FormType = z.infer<typeof CreatePasswordSchema>

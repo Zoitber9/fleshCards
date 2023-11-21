@@ -3,7 +3,7 @@ import { ChangeEvent, useRef } from 'react'
 import s from './upload-photo.module.scss'
 
 import { ChangePhoto } from '@/assets/icons'
-import Button from '@/components/ui/button/button.tsx'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   onAvatarChange: (newAvatar: File) => void
@@ -25,7 +25,7 @@ export const UploadPhoto = ({ onAvatarChange }: Props) => {
   }
 
   return (
-    <Button variant="secondary" className={s.editAvatarButton}>
+    <Button as={'button'} variant="secondary" className={s.editAvatarButton}>
       <ChangePhoto onClick={onClickChangeAvatarHandler} />
       <input
         ref={fileInputRef}

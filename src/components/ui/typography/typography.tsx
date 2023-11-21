@@ -1,10 +1,10 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ComponentPropsWithRef, ElementType, forwardRef, ReactNode, Ref } from 'react'
 
 import { clsx } from 'clsx'
 
 import s from './typography.module.scss'
 
-export interface TextProps<T extends ElementType> {
+type TypographyProps<T extends ElementType = 'span'> = {
   as?: T
   variant?:
     | 'large'
@@ -22,16 +22,21 @@ export interface TextProps<T extends ElementType> {
     | 'error'
   children?: ReactNode
   className?: string
-}
+} & ComponentPropsWithRef<T>
 
-export function Typography<T extends ElementType = 'p'>({
-  as,
-  className,
-  variant = 'body1',
-  ...restProps
-}: TextProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof TextProps<T>>) {
-  const classNames = clsx(s.text, s[variant], className)
-  const Component = as || 'p'
+export const Typography = forwardRef(
+  <T extends ElementType = 'span'>(
+    { as, variant = 'body1', className, children, ...rest }: TypographyProps<T>,
+    ref: Ref<T>
+  ) => {
+    const Component = as ?? 'span'
 
-  return <Component className={classNames} {...restProps} />
-}
+    const classes = clsx(s[variant], className)
+
+    return (
+      <Component ref={ref} className={classes} {...rest}>
+        {children}
+      </Component>
+    )
+  }
+)

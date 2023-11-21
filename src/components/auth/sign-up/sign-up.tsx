@@ -1,98 +1,75 @@
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './sign-up.module.scss'
 
-import { Card, Typography } from '@/components/ui'
-import Button from '@/components/ui/button/button.tsx'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field.tsx'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
 
-const loginSchema = z
+const signUpSchema = z
   .object({
-    email: z
-      .string()
-      .trim()
-      .email('Invalid email address')
-      .nonempty('Enter email')
-      .min(3, 'Login must be at least 3 characters'),
-    password: z
-      .string()
-      .trim()
-      .nonempty('Enter password')
-      .min(8, 'Password must be at least 8 characters'),
-    passwordConfirmation: z.string().trim().nonempty('Enter password'),
+    email: z.string().trim().email(),
+    password: z.string().trim().min(3).max(30),
+    confirmPassword: z.string().trim(),
+    name: z.string().trim().min(3).max(30).optional(),
   })
-  .superRefine((data, ctx) => {
-    if (data.password !== data.passwordConfirmation) {
-      ctx.addIssue({
-        message: 'Passwords do not match',
-        code: z.ZodIssueCode.custom,
-        path: ['passwordConfirmation'],
-      })
-    }
-
-    return data
+  .refine(data => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
   })
 
-type FormType = z.infer<typeof loginSchema>
+export type SignUpForm = z.infer<typeof signUpSchema>
 
-type Props = {
-  onSubmit: (data: FormType) => void
-}
-
-export const SignUp = (props: Props) => {
-  const { control, handleSubmit } = useForm<FormType>({
-    mode: 'onSubmit',
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-    },
+type Props = { onSubmitHandler: (data: SignUpForm) => void }
+export const SignUp = ({ onSubmitHandler }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpForm>({
+    resolver: zodResolver(signUpSchema),
   })
 
-  const handleFormSubmit = handleSubmit(props.onSubmit)
+  const classNames = {
+    wrapper: s.wrapper,
+    button: s.button,
+    question: s.question,
+    link: s.link,
+    form: s.form,
+  }
 
   return (
-    <>
-      <DevTool control={control} />
-      <Card className={s.card}>
-        <Typography variant={'large'}>Sign In</Typography>
-        <form className={s.form} onSubmit={handleFormSubmit}>
-          <ControlledTextField
-            placeholder={'Email'}
-            name={'email'}
-            control={control}
-            label={'Email'}
-          />
-          <ControlledTextField
-            placeholder={'Password'}
-            type={'password'}
-            name={'password'}
-            control={control}
-            label={'Password'}
-          />
-          <ControlledTextField
-            placeholder={'Confirm password'}
-            type={'password'}
-            name={'passwordConfirmation'}
-            control={control}
-            label={'Confirm password'}
-          />
-
-          <Button fullWidth={true} type="submit">
-            Sign In
-          </Button>
-          <Typography className={s.caption} variant="body2">
-            Already have an account?
-          </Typography>
-          <Typography variant="link1" as={'a'} href="/" className={s.linkSignIn}>
-            Sign In
-          </Typography>
-        </form>
-      </Card>
-    </>
+    <Card className={classNames.wrapper}>
+      <Typography variant={'large'}>Sign Up</Typography>
+      <form className={classNames.form} onSubmit={handleSubmit(onSubmitHandler)}>
+        <TextField errorMessage={errors.email?.message} {...register('email')} label={'Email*'} />
+        <TextField errorMessage={errors.name?.message} {...register('name')} label={'Name'} />
+        <TextField
+          errorMessage={errors.password?.message}
+          {...register('password')}
+          label={'Password*'}
+          type={'password'}
+        />
+        <TextField
+          errorMessage={errors.confirmPassword?.message}
+          {...register('confirmPassword')}
+          type={'password'}
+          label={'Confirm password*'}
+        />
+        <Button className={classNames.button} fullWidth={true}>
+          Sign Up
+        </Button>
+      </form>
+      <Typography variant={'body2'} className={classNames.question}>
+        Already have an account?
+      </Typography>
+      <Typography className={classNames.link} as={NavLink} to={'/login'} variant={'link1'}>
+        Sign In
+      </Typography>
+    </Card>
   )
 }

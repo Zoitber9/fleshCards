@@ -1,6 +1,4 @@
 .editAvatarButton {
-  all: unset;
-
   cursor: pointer;
 
   position: absolute;
@@ -9,12 +7,10 @@
 
   width: 32px;
   height: 32px;
+  padding: 6px;
 
-  & button {
-    padding: 6px;
-    border-radius: 50%;
-    outline: none;
-  }
+  border-radius: 50%;
+  outline: none;
 }
 
 .inputPhoto {
@@ -22,5 +18,4 @@
   display: none;
   width: 10px;
   height: 10px;
-
 }

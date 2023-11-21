@@ -9,7 +9,7 @@ type AvatarProps = {
   alt?: string
   children?: ReactNode
 }
-export const UserAvatar = ({ src, alt, children }: AvatarProps) => (
+export const Avatars = ({ src, alt, children }: AvatarProps) => (
   <div style={{ display: 'flex', gap: 20 }}>
     <Avatar.Root className={s.avatarRoot}>
       <Avatar.Image className={s.avatarImage} src={src} />
