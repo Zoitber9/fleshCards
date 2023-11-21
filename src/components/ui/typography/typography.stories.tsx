@@ -1,6 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Typography } from '@/components/ui/typography/typography.tsx'
+import { Typography } from './'
+
+const variantOptions = [
+  'large',
+  'h1',
+  'h2',
+  'h3',
+  'body1',
+  'body2',
+  'subtitle1',
+  'subtitle2',
+  'caption',
+  'overline',
+  'link1',
+  'link2',
+]
+const colorOptions = ['primary', 'secondary', 'inherit', 'link', 'error']
 
 const meta = {
   title: 'Components/Typography',
@@ -8,34 +24,15 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     variant: {
-      options: [
-        'large',
-        'h1',
-        'h2',
-        'h3',
-        'body1',
-        'body2',
-        'subtitle1',
-        'subtitle2',
-        'caption',
-        'overline',
-        'link1',
-        'link2',
-        'error',
-      ],
+      options: variantOptions,
       control: { type: 'radio' },
     },
-  },
-  parameters: {
-    backgrounds: {
-      default: 'night',
-      values: [
-        {
-          name: 'night',
-          value: '#000',
-        },
-      ],
+    color: {
+      options: colorOptions,
+      control: { type: 'radio' },
     },
+    className: { control: 'text' },
+    children: { control: 'text' },
   },
 } satisfies Meta<typeof Typography>
 
@@ -45,92 +42,123 @@ type Story = StoryObj<typeof meta>
 export const Large: Story = {
   args: {
     variant: 'large',
-    children: 'This is a large text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
 export const H1: Story = {
   args: {
     variant: 'h1',
-    children: 'This is a h1 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const H2: Story = {
   args: {
     variant: 'h2',
-    children: 'This is a h2 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const H3: Story = {
   args: {
     variant: 'h3',
-    children: 'This is a h3 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const Body1: Story = {
   args: {
     variant: 'body1',
-    children: 'This is a body1 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
-export const Subtitle1: Story = {
-  args: {
-    variant: 'subtitle1',
-    children: 'This is a subtitle1 text',
-  },
-}
-
 export const Body2: Story = {
   args: {
     variant: 'body2',
-    children: 'This is a body2 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
+export const Subtitle1: Story = {
+  args: {
+    variant: 'subtitle1',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
+  },
+}
 export const Subtitle2: Story = {
   args: {
     variant: 'subtitle2',
-    children: 'This is a subtitle2 text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
-export const Caption: Story = {
+export const CaptionWithError: Story = {
   args: {
     variant: 'caption',
-    children: 'This is a caption text',
+    color: 'error',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const Overline: Story = {
   args: {
     variant: 'overline',
-    children: 'This is a overline text',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const Link1: Story = {
   args: {
     variant: 'link1',
-    children: 'This is a link 1 text',
-    as: 'a',
+    color: 'link',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
-
 export const Link2: Story = {
   args: {
     variant: 'link2',
-    href: 'https://google.com',
-    children: 'This is a link 2 text',
-  },
-}
-
-export const Error: Story = {
-  args: {
-    variant: 'error',
-    href: 'https://google.com',
-    children: 'This is a Error text',
+    color: 'link',
+    children: (
+      <>
+        Carosserie Test Zürich <br /> Stauffacherstrasse 31 <br /> 8004 Zürich, ZH, CH
+      </>
+    ),
   },
 }
