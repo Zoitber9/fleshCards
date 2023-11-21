@@ -1,7 +1,6 @@
-.card {
-  width: 100%;
-  max-width: 413px;
-  padding: 33px 36px 29px;
+.wrapper {
+  max-width: 420px;
+  padding: 30px 36px 29px;
 }
 
 .form {
@@ -10,24 +9,20 @@
   gap: 24px;
 
   width: 100%;
-  margin-bottom: 12px;
+  margin-top: 27px;
 }
 
-.caption {
-  display: flex;
-  justify-content: center;
-
-  color: inherit;
-  text-align: right;
-  text-decoration: none;
+form .button {
+  margin-top: 36px;
 }
 
-.linkSignIn,
-.linkSignUp {
-  display: flex;
-  justify-content: center;
+.question {
+  margin-top: 20px;
+  margin-bottom: 11px;
+}
 
-  font-size: var(--font-size-l);
+a.link {
+  font-size: var(--font-size-m);
   font-weight: var(--font-weight-bold);
-  color: var(--color-accent-500) !important;
+  color: var(--color-accent-500);
 }

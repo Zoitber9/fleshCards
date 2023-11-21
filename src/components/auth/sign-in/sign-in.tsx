@@ -1,83 +1,109 @@
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useController, useForm } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './sign-in.module.scss'
 
-import { Card, Typography } from '@/components/ui'
-import Button from '@/components/ui/button/button.tsx'
-import { ControlledCheckbox } from '@/components/ui/controlled/controlled-checkbox/controlled-checkbox.tsx'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field.tsx'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/check-box'
+import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/components/ui/typography'
 
-const loginSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .email('Invalid email address')
-    .nonempty('Enter email')
-    .min(3, 'Login must be at least 3 characters'),
+export const signInSchema = z.object({
+  email: z.string().trim().nonempty('Email is required').email('Please enter a valid email'),
   password: z
-    .string()
+    .string({
+      required_error: 'Password is required',
+    })
     .trim()
-    .nonempty('Enter password')
-    .min(8, 'Password must be at least 8 characters'),
+    .nonempty('Password is required')
+    .min(3, 'Password must be at least 3 characters')
+    .max(30),
+
   rememberMe: z.boolean().optional(),
 })
 
-type FormType = z.infer<typeof loginSchema>
-
-type Props = {
-  onSubmit: (data: FormType) => void
+export type SignInForm = z.infer<typeof signInSchema>
+export type SignInProps = {
+  onHandleSubmit: (form: SignInForm) => void
+  loading?: boolean
+  disabled?: boolean
 }
 
-export const SignIn = (props: Props) => {
-  const { control, handleSubmit } = useForm<FormType>({
-    mode: 'onSubmit',
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-      rememberMe: false,
-    },
+const initialValues: SignInForm = {
+  email: '',
+  password: '',
+  rememberMe: false,
+}
+
+export const SignIn = ({ onHandleSubmit, loading = false, disabled = false }: SignInProps) => {
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignInForm>({
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(signInSchema),
+    defaultValues: initialValues,
   })
 
-  const handleFormSubmit = handleSubmit(props.onSubmit)
+  const {
+    field: { value, onChange },
+  } = useController({
+    name: 'rememberMe',
+    control,
+    defaultValue: false,
+  })
+  const onHandleSubmitForm = handleSubmit((form: SignInForm) => {
+    onHandleSubmit(form)
+  })
 
   return (
-    <>
-      <DevTool control={control} />
-      <Card className={s.card}>
-        <Typography variant={'large'}>Sign In</Typography>
-        <form className={s.form} onSubmit={handleFormSubmit}>
-          <ControlledTextField
-            placeholder={'Email'}
-            name={'email'}
-            control={control}
+    <Card>
+      <Typography variant={'large'} className={s.signInTypography}>
+        Sign In
+      </Typography>
+      <form onSubmit={onHandleSubmitForm}>
+        <div className={s.signInTextField}>
+          <TextField
             label={'Email'}
-          />
-          <ControlledTextField
-            placeholder={'Password'}
-            type={'password'}
-            name={'password'}
-            control={control}
+            {...register('email')}
+            errorMessage={errors.email?.message}
+          ></TextField>
+          <TextField
             label={'Password'}
-          />
-          <ControlledCheckbox name={'rememberMe'} control={control} label={'Remember me'} />
-          <Typography className={s.linkRecoverPassword} variant={'body2'} as={'a'} href={'/'}>
+            type={'password'}
+            {...register('password')}
+            errorMessage={errors.password?.message}
+          ></TextField>
+        </div>
+        <div className={s.signInCheckboxWrapper}>
+          <Checkbox label={'Remember me'} checked={value} onChange={onChange} />
+        </div>
+        <div className={s.signInForgotPasswordContainer}>
+          <Typography
+            as={NavLink}
+            to={'/forgot-password'}
+            variant={'body2'}
+            className={s.signInForgotPassword}
+          >
             Forgot Password?
           </Typography>
-          <Button fullWidth={true} type="submit">
+        </div>
+        <div className={s.signInButton}>
+          <Button variant={'primary'} loading={loading} disabled={disabled} fullWidth>
             Sign In
           </Button>
-          <Typography className={s.caption} variant="body2">
-            Don`t have an account?
-          </Typography>
-          <Typography variant="link1" as={'a'} href="/sign-up" className={s.linkSignUp}>
-            Sign Up
-          </Typography>
-        </form>
-      </Card>
-    </>
+        </div>
+      </form>
+      <Typography>{`Don't have an account?`}</Typography>
+      <Typography as={NavLink} to={'/sign-up'} variant={'body1'} className={s.signInLink}>
+        Sign Up
+      </Typography>
+    </Card>
   )
 }

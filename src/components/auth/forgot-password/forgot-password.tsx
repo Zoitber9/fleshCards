@@ -1,13 +1,15 @@
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { NavLink } from 'react-router-dom'
 import { z } from 'zod'
 
 import s from './forgot-password.module.scss'
 
-import { Card, Typography } from '@/components/ui'
-import Button from '@/components/ui/button/button'
-import { ControlledTextField } from '@/components/ui/controlled/controlled-text-field/controlled-text-field'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { ControlledTextField } from '@/components/ui/controlled/controlled-textfiled/controlled-textfield.tsx'
+import { Typography } from '@/components/ui/typography'
 
 const ForgotPasswordSchema = z.object({
   email: z
@@ -60,7 +62,7 @@ export const ForgotPassword = (props: Props) => {
         <Typography variant="body2" className={s.caption}>
           Did you remember your password?
         </Typography>
-        <Typography variant="link1" as={'a'} href="/sign-in" className={s.loginLink}>
+        <Typography variant="link1" as={NavLink} to={'/login'} className={s.loginLink}>
           Try logging in
         </Typography>
       </Card>

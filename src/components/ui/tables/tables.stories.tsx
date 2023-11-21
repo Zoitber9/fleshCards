@@ -8,9 +8,8 @@ import s from './tables.module.scss'
 
 import { Column, Sort, Table } from './'
 
-import { Delete, Play } from '@/assets/icons'
-import { Redactor } from '@/assets/icons/redactor.tsx'
-import Button from '@/components/ui/button/button'
+import { Delete, Play, Redactor } from '@/assets/icons'
+import { Button } from '@/components/ui/button'
 
 export default {
   title: 'Components/Table',

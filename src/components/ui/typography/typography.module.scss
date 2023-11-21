@@ -1,74 +1,128 @@
-@mixin typography($fontSize, $lineHeight, $fontWeight) {
-  margin: 0;
-
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-  line-height: $lineHeight;
-  color: var(--color-text-primary);
+@mixin add-focus-visible {
+  &:focus-visible {
+    border-radius: 1px;
+    outline: 0.125rem solid var(--color-info-700);
+    outline-offset: 0.1875rem;
+  }
 }
 
+// font-weight
+
+.large,
+.h1,
+.h2,
+.h3,
+.subtitle1,
+.subtitle2,
+.overline {
+  @include add-focus-visible;
+
+  font-weight: var(--font-weight-bold);
+}
+
+.body1,
+.body2,
+.caption,
+.link1,
+.link2,
+.error {
+  @include add-focus-visible;
+
+  font-weight: var(--font-weight-regular);
+}
+
+// line-height
+
+.large,
+.h1 {
+  @include add-focus-visible;
+
+  line-height: var(--line-height-l);
+}
+
+.h2,
+.h3,
+.subtitle1,
+.body1,
+.link1,
+.error {
+  @include add-focus-visible;
+
+  line-height: var(--line-height-m);
+}
+
+.body2,
+.subtitle2,
+.caption,
+.overline,
+.link2 {
+  @include add-focus-visible;
+
+  line-height: var(--line-height-s);
+}
+
+// font-size
+
 .large {
-  @include typography(var(--font-size-xxl), var(--line-height-l), var(--font-weight-bold));
+  @include add-focus-visible;
+
+  font-size: var(--font-size-xxl);
 }
 
 .h1 {
-  @include typography(var(--font-size-xl), var(--line-height-l), var(--font-weight-bold));
+  @include add-focus-visible;
+
+  font-size: var(--font-size-xl);
 }
 
 .h2 {
-  @include typography(var(--font-size-l), var(--line-height-m), var(--font-weight-bold));
+  @include add-focus-visible;
+
+  font-size: var(--font-size-l);
 }
 
-.h3 {
-  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
-}
-
+.h3,
+.subtitle1,
 .body1 {
-  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-regular));
+  @include add-focus-visible;
+
+  font-size: var(--font-size-m);
 }
 
-.subtitle1 {
-  @include typography(var(--font-size-m), var(--line-height-m), var(--font-weight-bold));
+.body2,
+.subtitle2,
+.link1 {
+  @include add-focus-visible;
+
+  font-size: var(--font-size-s);
 }
 
-.body2 {
-  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+.caption,
+.overline,
+.link2,
+.error {
+  @include add-focus-visible;
 
-  color: var(--color-dark-100);
+  font-size: var(--font-size-xs);
 }
 
-.subtitle2 {
-  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-bold));
-}
-
-.overline {
-  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-bold));
-}
-
-.caption {
-  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
-}
+// link decorations
 
 .link1,
-.link1:visited {
-  @include typography(var(--font-size-s), var(--line-height-m), var(--font-weight-regular));
+.link2 {
+  @include add-focus-visible;
 
-  cursor: pointer;
-  color: var(--color-text-link);
-  text-decoration: underline;
-}
+  color: var(--primary-500, #397df6);
+  text-decoration-line: underline;
 
-.link2,
-.link2:visited {
-  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-regular));
+  &:hover {
+    cursor: pointer;
+  }
 
-  cursor: pointer;
-  color: var(--color-text-link);
-  text-decoration: underline;
 }
 
 .error {
-  @include typography(var(--font-size-xs), var(--line-height-m), var(--font-weight-regular));
+  @include add-focus-visible;
 
   color: var(--color-danger-300);
 }

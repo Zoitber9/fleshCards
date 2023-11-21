@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { checkEmail } from '@/components/auth/check-email/check-email.tsx'
+import { CheckEmail } from '@/components/auth/check-email/check-email.tsx'
 
 const meta = {
   title: 'Auth/checkEmail',
-  component: checkEmail,
+  component: CheckEmail,
   tags: ['autodocs'],
-} satisfies Meta<typeof checkEmail>
+} satisfies Meta<typeof CheckEmail>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    email: 'hhhahhd@gmail.com',
+  },
+}
