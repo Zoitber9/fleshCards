@@ -1,34 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from './button.tsx'
-
-import { Logout } from '@/assets/icons'
+import { LogoutSvg } from '@/assets/icons/logout'
+import { Button } from '@/components/ui/button/button'
 
 const meta = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
-  args: {
-    href: 'https://sass-lang.com/',
-    fullWidth: false,
-  },
   argTypes: {
-    onClick: {
-      action: 'clicked',
-    },
     variant: {
       options: ['primary', 'secondary', 'tertiary', 'link'],
-      control: { type: 'select' },
+      control: { type: 'radio' },
     },
-    fullWidth: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    ref: { control: { type: 'select' } },
-    as: { options: ['button', 'a'], control: { type: 'radio' } },
-    className: { control: 'text' },
-    href: {
-      control: 'text',
-      if: { arg: 'as', eq: 'a' },
+    fullWidth: {
+      options: [true, false],
+      control: { type: 'radio' },
     },
+    as: { control: 'text' },
+    children: { control: 'text' },
   },
 } satisfies Meta<typeof Button>
 
@@ -38,10 +27,19 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     variant: 'primary',
-    children: 'Button Primary',
+    children: 'Primary button',
     disabled: false,
-    as: 'button',
-    loading: false,
+  },
+}
+export const PrimaryWithIcon: Story = {
+  args: {
+    variant: 'primary',
+    children: (
+      <>
+        <LogoutSvg />
+        Primary button
+      </>
+    ),
   },
 }
 
@@ -50,7 +48,6 @@ export const Secondary: Story = {
     variant: 'secondary',
     children: 'Secondary Button',
     disabled: false,
-    as: 'button',
   },
 }
 export const Tertiary: Story = {
@@ -58,30 +55,22 @@ export const Tertiary: Story = {
     variant: 'tertiary',
     children: 'Tertiary Button',
     disabled: false,
-    as: 'button',
   },
 }
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Link-button',
-    as: 'a',
-    href: 'https://webref.ru/',
+    children: 'Link Button',
     disabled: false,
   },
 }
 
-export const ButtonWithIcon: Story = {
+export const AsLink: Story = {
   args: {
-    variant: 'primary',
-    children: (
-      <>
-        <Logout />
-        <div>Button Primary</div>
-      </>
-    ),
-    disabled: false,
-    as: 'button',
+    variant: 'tertiary',
+    children: 'Link that looks like a button',
+    as: 'a',
+    href: 'https://google.com',
   },
 }
 
@@ -91,28 +80,5 @@ export const FullWidth: Story = {
     children: 'Full Width Button',
     disabled: false,
     fullWidth: true,
-    as: 'button',
-  },
-}
-
-export const LoadingButton: Story = {
-  args: {
-    variant: 'primary',
-    disabled: false,
-    as: 'button',
-    loading: true,
-    children: (
-      <>
-        <div>Button Primary</div>
-      </>
-    ),
-  },
-}
-export const AsLink: Story = {
-  args: {
-    variant: 'primary',
-    children: 'Link that looks like a button',
-    as: 'a',
-    href: 'https://sass-lang.com',
   },
 }

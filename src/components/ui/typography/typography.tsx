@@ -1,42 +1,33 @@
-import { ComponentPropsWithRef, ElementType, forwardRef, ReactNode, Ref } from 'react'
-
-import { clsx } from 'clsx'
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import s from './typography.module.scss'
+type VariantType =
+  | 'large'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'body1'
+  | 'body2'
+  | 'subtitle1'
+  | 'subtitle2'
+  | 'caption'
+  | 'overline'
+  | 'link1'
+  | 'link2'
 
-type TypographyProps<T extends ElementType = 'span'> = {
+type ColorType = 'primary' | 'secondary' | 'inherit' | 'error' | 'link'
+
+export type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
-  variant?:
-    | 'large'
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'body1'
-    | 'body2'
-    | 'subtitle1'
-    | 'subtitle2'
-    | 'caption'
-    | 'overline'
-    | 'link1'
-    | 'link2'
-    | 'error'
+  variant: VariantType
   children?: ReactNode
   className?: string
-} & ComponentPropsWithRef<T>
+  color?: ColorType
+} & ComponentPropsWithoutRef<T>
 
-export const Typography = forwardRef(
-  <T extends ElementType = 'span'>(
-    { as, variant = 'body1', className, children, ...rest }: TypographyProps<T>,
-    ref: Ref<T>
-  ) => {
-    const Component = as ?? 'span'
+export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
+  const { variant = 'body1', className, as: Component = 'p', color = 'primary', ...rest } = props
+  const clN = `${s[variant]} ${className ?? ''} ${s[color]}`
 
-    const classes = clsx(s[variant], className)
-
-    return (
-      <Component ref={ref} className={classes} {...rest}>
-        {children}
-      </Component>
-    )
-  }
-)
+  return <Component className={clN} {...rest} />
+}
