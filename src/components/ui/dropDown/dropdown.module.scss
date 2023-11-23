@@ -15,11 +15,8 @@
   outline: none;
 }
 
-
-
 .content {
   position: relative;
-
 
   min-width: 134px;
   margin-top: 5px;
@@ -95,26 +92,20 @@
   }
 }
 
-
-
 .itemIcon {
   display: flex;
   align-items: center;
   justify-content: start;
-
-  //width: 24px;
   height: 24px;
 }
 
-.textContainer{
+.textContainer {
   display: flex;
   flex-direction: column;
 }
 
-.itemsContainer{
+.itemsContainer {
   display: flex;
   gap: 10px;
   align-items: center;
-
 }
-
