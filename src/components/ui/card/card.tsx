@@ -1,16 +1,12 @@
 import { ReactNode } from 'react'
 
-import clsx from 'clsx'
+import s from './card.module.scss'
 
-import styles from './card.module.scss'
-
-const { card } = styles
-
-type PropsType = {
+export type CardType = {
   className?: string
   children?: ReactNode
 }
 
-export const Card = ({ className, ...rest }: PropsType) => {
-  return <div className={clsx(card, className)} {...rest} />
+export const Card = ({ className, ...rest }: CardType) => {
+  return <div className={s.card + ' ' + `${className ?? ''}`} {...rest} />
 }

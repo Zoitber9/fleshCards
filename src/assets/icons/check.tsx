@@ -1,9 +1,6 @@
 import { memo } from 'react'
 
-import {
-  IconWrapper,
-  IconProps,
-} from '../../ReactProj/cardsTeamProject-main/src/assets/IconeWrapper.tsx'
+import { IconWrapper, IconProps } from '../IconeWrapper.tsx'
 
 const SvgCheck = (allProps: IconProps) => {
   const { svgProps: props, ...restProps } = allProps
