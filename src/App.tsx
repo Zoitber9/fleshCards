@@ -1,5 +1,13 @@
-import { ForgotPassword } from '@/components/auth/forgot-password'
+import { SignUp } from '@/components/auth/sign-up'
 
-export function App() {
-  return <ForgotPassword onSubmit={() => {}} />
+export const App = () => {
+  return (
+    <div>
+      <SignUp
+        onSubmit={e => {
+          console.log(e)
+        }}
+      ></SignUp>
+    </div>
+  )
 }
