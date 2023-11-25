@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 
-import { Logo, LogoutSvg } from 'assets/icons'
-import defaultAva from 'assets/icons/defaultAva.png'
-import { Person } from 'assets/icons/person.tsx'
-import { Button } from 'ui/button'
-import { Dropdown, DropdownItem, DropdownItemWithIcon } from 'ui/dropDown/dropdown.tsx'
-import { Avatars as Avatar } from 'ui/userAvatar/avatar.tsx'
-
 import s from './header.module.scss'
+
+import { Logo, LogoutSvg } from '@/assets/icons'
+import { Person } from '@/assets/icons/person'
+import { Button } from '@/components/ui/button'
+import { Dropdown, DropdownItem, DropdownItemWithIcon } from '@/components/ui/dropDown/dropdown'
+import { Avatars as Avatar } from '@/components/ui/userAvatar/avatar'
+import defaultAva from 'assets/icons/defaultAva.png'
 
 export type User = {
   name: string
