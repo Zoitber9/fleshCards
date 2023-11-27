@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import s from 'src/components/error404/error404.module.scss'
+
+import s from './error404.module.scss'
 
 import error404 from '@/assets/images/error404.png'
 import { Button } from '@/components/ui/button'

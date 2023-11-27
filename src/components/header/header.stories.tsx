@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { ProfileAvatar } from '@/assets/icons'
-import { Header } from '@/components/ui/header/header'
+import { Header } from '@/components/header/header'
 
 const meta = {
   title: 'Layout/Header',
