@@ -1,27 +1,17 @@
-.header {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-
+div .header {
   display: flex;
-  gap: 1080px;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   width: 100%;
   height: 60px;
-  padding: 0.375rem 1.75rem;
-
-  background-color: var(--color-dark-700);
-  border-bottom: 1px solid var(--color-dark-500);
+  padding: 12px 136px;
 
   .logo {
-    position: relative;
     width: 157px;
     height: 36px;
   }
-
 
   .userContainer {
     cursor: pointer;
@@ -30,7 +20,6 @@
     flex-direction: row;
     gap: 10px;
     align-items: center;
-
 
     .userName {
       border-bottom: 1px dashed white;
@@ -42,8 +31,6 @@
       border-radius: 36px;
     }
   }
-
-
 }
 
 .button {
@@ -65,10 +52,4 @@
   cursor: default;
   display: flex;
   flex-direction: column;
-
-  & img {
-    width: 36px;
-    height: 36px;
-    border-radius: 36px;
-  }
 }

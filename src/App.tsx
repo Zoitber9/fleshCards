@@ -1,13 +1,12 @@
-import { SignUp } from '@/components/auth/sign-up'
+import { Provider } from 'react-redux'
 
-export const App = () => {
+import { Router } from '@/router'
+import { store } from '@/services/store/store'
+
+export function App() {
   return (
-    <div>
-      <SignUp
-        onSubmit={e => {
-          console.log(e)
-        }}
-      ></SignUp>
-    </div>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   )
 }
