@@ -39,7 +39,7 @@ const privateRoutes: RouteObject[] = [
     element: <div>personal-information</div>,
   },
   {
-    path: '/decks',
+    path: '/cards',
     element: <div>decks</div>,
   },
 ]

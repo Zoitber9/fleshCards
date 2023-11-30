@@ -13,7 +13,7 @@ export const Layout = () => {
   //   navigate('/profile')
   // }
   // const defaultPage = () => {
-  //   navigate('/decks')
+  //   navigate('/cards')
   // }
 
   return (

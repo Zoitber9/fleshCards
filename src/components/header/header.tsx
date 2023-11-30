@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
-import s from 'src/components/header/header.module.scss'
+
+import s from './header.module.scss'
 
 import { Logo, LogoutSvg as Logout } from '@/assets/icons'
 import ProfileOutline from '@/assets/icons/profile-outline'
