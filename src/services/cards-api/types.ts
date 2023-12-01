@@ -23,7 +23,7 @@ export type GetCardParams = {
 }
 
 export type CreateCardRequest = {
-  deckId: string
+  id: string
   question: string
   answer: string
   questionImg: string

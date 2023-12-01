@@ -22,8 +22,8 @@ export const cardsApi = createApi({
         providesTags: ['Cards'],
       }),
       createCard: builder.mutation<Card, CreateCardRequest>({
-        query: ({ deckId, ...body }) => ({
-          url: `v1/decks/${deckId}/cards`,
+        query: ({ id, ...body }) => ({
+          url: `v1/decks/${id}/cards`,
           method: 'POST',
           body,
         }),
@@ -39,6 +39,20 @@ export const cardsApi = createApi({
           method: 'POST',
           body,
         }),
+        invalidatesTags: ['Cards'],
+      }),
+      getCard: builder.query<Card, string>({
+        query: id => `v1/cards/${id}`,
+        providesTags: ['Cards'],
+      }),
+      updateCard: builder.mutation<Card, CreateCardRequest>({
+        query: ({ id, ...body }) => {
+          return { url: `v1/cards/${id}`, method: 'PATCH', body }
+        },
+        invalidatesTags: ['Cards'],
+      }),
+      deleteCard: builder.mutation<void, string>({
+        query: id => `v1/cards/${id}`,
         invalidatesTags: ['Cards'],
       }),
     }
