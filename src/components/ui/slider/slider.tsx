@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Slider = (props: Props & Omit<RadixSlider.SliderProps, keyof Props>) => {
-  const { min = 0, max = 10, defaultValue, label, className, style, ...restProps } = props
+  const { min = 0, max = 20, defaultValue, label, className, style, ...restProps } = props
 
   const [value, setValue] = useState<number[]>(defaultValue || [min, max])
 
