@@ -31,9 +31,9 @@ export const Default = {
         </Table.Head>
         <Table.Body>
           <Table.Row>
-            <Table.Cell>React</Table.Cell>
+            <Table.Cell>Open to work</Table.Cell>
             <Table.Cell>4</Table.Cell>
-            <Table.Cell>18.03.2023</Table.Cell>
+            <Table.Cell>12.12.2023</Table.Cell>
             <Table.Cell>
               <Typography
                 as={'a'}
@@ -59,9 +59,9 @@ export const Default = {
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Java Script</Table.Cell>
+            <Table.Cell>Open to work</Table.Cell>
             <Table.Cell>2</Table.Cell>
-            <Table.Cell>12.03.2023</Table.Cell>
+            <Table.Cell>12.12.2023</Table.Cell>
             <Table.Cell>it-incubator</Table.Cell>
             <Table.Cell>
               <div className={s.buttonContainer}>

@@ -37,7 +37,7 @@ export const Header: FC<
   >
 > = ({ columns, sort, onSort, ...restProps }) => {
   const classNames = {
-    chevron: sort?.direction === 'asc' ? '' : s.chevronDown,
+    chevron: sort?.direction === 'asc' ? '' : s.chevron,
   }
   const handleSort = (key: string, sortable?: boolean) => () => {
     if (!onSort || !sortable) return
