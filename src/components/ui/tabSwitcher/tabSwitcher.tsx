@@ -1,54 +1,95 @@
+import { FC, ReactNode } from 'react'
+
+import * as RadixLabel from '@radix-ui/react-label'
 import * as Tabs from '@radix-ui/react-tabs'
-import clsx from 'clsx'
+import { TabsContent, TabsListProps, TabsProps, TabsTrigger } from '@radix-ui/react-tabs'
+import { clsx } from 'clsx'
 
 import s from './tabSwitcher.module.scss'
 
 import { Typography } from '@/components/ui/typography'
 
-export type TabSwitcherType = {
-  className?: string
+export type TabsAsChildProps = { asChild?: boolean }
+
+export type TabDataProps = {
+  value: string
+  title: string
   disabled?: boolean
-  list: string[]
-  title?: string
-  defaultValue?: string
-  onValueChange: (value: string) => void
+  content?: ReactNode | ReactNode[]
 }
 
-export const TabSwitcher = (props: TabSwitcherType) => {
-  const { list, title, className, disabled = false, defaultValue = list[1], onValueChange } = props
+export type TabsTriggerProps = { fullWidth?: boolean; tabData: TabDataProps[] }
 
-  const changeValueHandler = (value: string) => {
-    onValueChange(value)
-  }
+export type TabsContentProps = { forceMount?: boolean }
 
-  const classNames = {
-    container: clsx(s.container, className),
-    root: s.root,
-    list: s.list,
-    trigger: clsx(s.trigger, disabled && s.disabled),
-  }
+export type CombinedTabsProps = TabsAsChildProps &
+  TabsListProps &
+  TabsTriggerProps &
+  TabsContentProps &
+  TabsProps & { children?: ReactNode; label?: string }
+
+export const TabSwitcher: FC<CombinedTabsProps> = props => {
+  const {
+    value,
+    children,
+    defaultValue,
+    onValueChange,
+    fullWidth = false,
+    tabData,
+    orientation = 'horizontal',
+    dir = 'ltr',
+    activationMode = 'automatic',
+    loop = true,
+    label,
+    ...restProps
+  } = props
+
+  const renderTabsForTrigger = tabData?.map((el, index) => (
+    <TabsTrigger
+      key={el.value}
+      className={clsx(
+        s.TabsTrigger,
+        el.disabled && s.disabled,
+        fullWidth && s.fullWidth,
+        tabData.length - 1 === index && s.lastTab,
+        index === 0 && s.firstTab
+      )}
+      value={el.disabled ? 'disabled' : el.value}
+    >
+      {el.title}
+    </TabsTrigger>
+  ))
+
+  const renderChildrenOrTabContent =
+    children ||
+    tabData?.map(el => (
+      <TabsContent key={el.value} value={el.disabled ? '' : el.value}>
+        {el.content}
+      </TabsContent>
+    ))
 
   return (
-    <div className={classNames.container}>
-      <Typography variant="body1" className={s.label}>
-        {title}
-      </Typography>
+    <RadixLabel.Root>
+      {label && (
+        <Typography variant={'body1'} as={'label'} className={s.label}>
+          {label}
+        </Typography>
+      )}
       <Tabs.Root
-        className={classNames.root}
+        className={s.TabsRoot}
         defaultValue={defaultValue}
-        aria-label={title}
-        onValueChange={changeValueHandler}
+        value={value}
+        onValueChange={onValueChange}
+        orientation={orientation}
+        activationMode={activationMode}
+        dir={dir}
+        asChild={restProps.asChild}
       >
-        <Tabs.List className={classNames.list}>
-          {list.map((el, i) => (
-            <Tabs.Trigger key={i} className={classNames.trigger} value={el}>
-              <Typography variant="body1" color="primary">
-                {el}
-              </Typography>
-            </Tabs.Trigger>
-          ))}
+        <Tabs.List className={s.TabsList} loop={loop}>
+          {renderTabsForTrigger}
         </Tabs.List>
+        {renderChildrenOrTabContent}
       </Tabs.Root>
-    </div>
+    </RadixLabel.Root>
   )
 }

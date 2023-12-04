@@ -1,7 +1,7 @@
 .table {
   border-collapse: collapse;
 
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 
   color: var(--color-light-100);
@@ -43,9 +43,10 @@
   background-color: var(--color-dark-900);
   border-bottom: 1px solid var(--color-dark-500);
 
-
+  button {
+    padding: 6px 5px;
+  }
 }
-
 
 .chevronDown {
   transform: rotate(180deg);
@@ -58,5 +59,7 @@
   font-size: var(--font-size-xxl);
 }
 
-
-
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}

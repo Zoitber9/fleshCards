@@ -1,0 +1,29 @@
+.wrapper {
+  width: 100%;
+  max-width: 1006px;
+  margin: 0 auto;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  margin: 33px 0 10px;
+}
+
+.filtersContainer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+}
