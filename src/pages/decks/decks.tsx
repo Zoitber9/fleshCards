@@ -11,13 +11,17 @@ import { TabSwitcher } from '@/components/ui/tabSwitcher'
 import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
 import { useGetDecksQuery } from '@/services/decks-api/decks-api'
+import { currentPageReducer } from '@/services/store/deckParamsSlice'
+import { useAppDispatch } from '@/services/store/store'
 
 export const Decks = () => {
+  const dispatch = useAppDispatch()
   const { data, isSuccess } = useGetDecksQuery()
 
   const [currentPage, setCurrentPage] = useState<number>(data?.pagination.currentPage || 1)
 
   const handlerPagination = (page: number) => {
+    dispatch(currentPageReducer({ currentPage: page }))
     setCurrentPage(page)
   }
 
